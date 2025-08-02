@@ -1,0 +1,28 @@
+# version: "3.9"
+services:
+  db:
+    image: postgres:alpine
+    container_name: fs4t-db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: fs4t_db
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+
+  bot:
+    build: ./bot
+    container_name: fs4t-bot
+    restart: always
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@db:5432/fs4t_db
+    volumes:
+      - ./bot:/usr/src/app
+    working_dir: /usr/src/app
+    command: ["node", "index.js"]
