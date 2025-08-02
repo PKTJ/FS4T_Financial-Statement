@@ -20,9 +20,9 @@ services:
     restart: always
     depends_on:
       - db
+    env_file:
+      - ./bot/.env
     environment:
       DATABASE_URL: postgres://postgres:postgres@db:5432/fs4t_db
-    volumes:
-      - ./bot:/usr/src/app
-    working_dir: /usr/src/app
-    command: ["node", "index.js"]
+    ports:
+      - "3000:3000"
