@@ -22,7 +22,12 @@ services:
       - db
     env_file:
       - ./bot/.env
+    volumes:
+      - ./bot/.env:/app/bot/.env
     environment:
       DATABASE_URL: postgres://postgres:postgres@db:5432/fs4t_db
     ports:
       - "3000:3000"
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4

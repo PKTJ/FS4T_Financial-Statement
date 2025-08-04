@@ -30,3 +30,8 @@ client.login(process.env.DISCORD_TOKEN);
 
 // Mulai OAuth server
 startOAuthServer();
+
+//log debug
+console.log('Client ID:', process.env.GOOGLE_CLIENT_ID);
+console.log('Client Secret:', process.env.GOOGLE_CLIENT_SECRET);
+console.log('Redirect URI:', process.env.GOOGLE_REDIRECT_URI);
